@@ -1,0 +1,19 @@
+Database name: HelloExpress
+
+sqlite> CREATE TABLE LINGUISTS(
+   ID INT             PRIMARY KEY,
+   FIRSTNAME          TEXT    NOT NULL,
+   LASTNAME           TEXT    NOT NULL,
+   EMAIL              TEXT    NOT NULL,
+   TELEPHONE           VARCHAR(20),
+   PAYPAL             VARCHAR(20),
+   LANGSRC            TEXT    NOT NULL,
+   LANGTGT            TEXT    NOT NULL,
+   STREETADDRESS      TEXT,
+   ZIPCODE            VARCHAR(10),
+   CITY               VARCHAR(20)
+);
+
+sqlite> CREATE TABLE ID(
+   ID INTEGER
+);

@@ -1,0 +1,48 @@
+<html>
+    <head>
+<meta charset="UTF-8"> </meta>
+<link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<form action="/enroll" method="POST">
+    <fieldset id="fields"> <legend>Basic information about you</legend>
+    
+    <legend id="required">First name *</legend>
+    <input type="text" size=50 name="firstname" value=""><br><br>
+
+    <legend id="required">Last name *</legend>
+    <input type="text" size=50 name="lastname" value=""><br><br>
+
+    <legend id="required">Email address *</legend>
+    <input type="text" size=50 name="email" value=""><br><br>
+
+    <legend>Telephone number</legend>
+    <input type="text" size=50 name="telephone" value="+( )"><br><br>
+
+    <legend>Paypal address</legend>
+    <input type="text" size=50 name="paypal" value=""><br><br>
+
+    <legend id="required">Source languages * </legend>
+    <input type="textarea" size=75 name="langsrc" value=""><br><br>
+  
+    <legend id="required">Target languages * </legend>
+    <input type="textarea" size=75 name="langtgt" value=""><br><br>
+
+    <legend>Street address</legend>
+    <input type="text" size=50 name="streetaddress" value=""><br><br>
+
+    <legend>Zip or post code</legend>
+    <input type="text" size=50 name="zipcode" value=""><br><br>
+
+    <legend>City/town</legend>
+    <input type="text" size=50 name="city" value=""><br><br>
+
+    <legend>Temporary PIN number from email</legend>
+    <input type="text" size=50 name="pin" value=""><br><br>
+
+</fieldset>
+    <input type="submit" value="Submit">
+
+</form>
+
+</html>
