@@ -1,7 +1,7 @@
 # UserManagement
 Modules to manage users, starting with a signup module.
 
-**Enrollment.zip** contains the node.js source files for an initial linguist signup module using email verification.
+**Enrollment.zip** contains the **node.js source files** for an initial linguist signup module using email verification.
 A termporary ID/PIN is created for each user and deleted at the end of the signup process.
 
   "dependencies": {
@@ -15,6 +15,8 @@ A termporary ID/PIN is created for each user and deleted at the end of the signu
  the signup module.
  Install the dependencies and sqlite. Create the database with the tables LINGUISTS and ID.
  The ID table replaces the use of cookies. 
+ 
+ Run the app: node server.js
  
  Application flow:
  1. User goes to index.hml
