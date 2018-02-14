@@ -2,14 +2,14 @@ Database name: HelloExpress
 
 sqlite> CREATE TABLE LINGUISTS(
    ID INT             PRIMARY KEY,
-   FIRSTNAME          TEXT    NOT NULL,
-   LASTNAME           TEXT    NOT NULL,
-   EMAIL              TEXT    NOT NULL,
-   TELEPHONE           VARCHAR(20),
+   FIRSTNAME          VARCHAR(30) NOT NULL,
+   LASTNAME           VARCHAR(30) NOT NULL,
+   EMAIL              VARCHAR(30) NOT NULL,
+   TELEPHONE          VARCHAR(20),
    PAYPAL             VARCHAR(20),
-   LANGSRC            TEXT    NOT NULL,
-   LANGTGT            TEXT    NOT NULL,
-   STREETADDRESS      TEXT,
+   LANGSRC            VARCHAR(50) NOT NULL,
+   LANGTGT            VARCHAR(50) NOT NULL,
+   STREETADDRESS      VARCHAR(40),
    ZIPCODE            VARCHAR(10),
    CITY               VARCHAR(20)
 );
