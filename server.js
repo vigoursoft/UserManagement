@@ -26,7 +26,7 @@ app.get('/register', function(request, response){
     let sql="SELECT id From ID WHERE id="+request.query.id+";";
     console.log(sql);
 
-    db.get(sql,  (err, row) => {
+    db.get(sql, (err, row) => {
         if (err) {
         response.send("That did not work.");     
         return console.error(err.message);
@@ -41,7 +41,7 @@ app.get('/register', function(request, response){
   /* retrieve the email addy from index html form, create  
   and store a temp id/PIN; send email invitation link */
   app.post('/send-mail', function (request, response) {
-    console.log('done reading file.'+dict.port);
+    
     let transporter = nodeMailer.createTransport({
         host: ''+dict.host+'',
         port: parseInt(dict.port),
@@ -59,7 +59,7 @@ app.get('/register', function(request, response){
    let mailOptions = {
         from: dict.from, // sender address
         to: request.body.recipient, // list of receivers
-        subject: dict.register, // Subject line
+        subject: dict.subject, // Subject line
        // text: request.body.body, // plain text body
         html: '<a href="http://localhost:3000/register?recipient=' +request.body.recipient
             +'&id='+randNumber+'"<b>Please click this link to continue registration</b></a><p>'+
@@ -73,12 +73,12 @@ app.get('/register', function(request, response){
             return console.log(error + 'Message to'+ request.body.recipient);
         }
         console.log('Message sent');
-       // response.redirect('/');  
+      
         let sql = "INSERT INTO id (id) "+
         "VALUES ('"+randNumber+"' )";
     
         console.log(sql);
-        dbops(sql, "Random number inserted ");
+        dbops(sql,[], "Random number inserted ");
 
         }); //transporter
        response.send('Check your email');      
@@ -89,34 +89,33 @@ app.get('/register', function(request, response){
     let columns="id, firstname, lastname, email, telephone, paypal, langsrc, langtgt,"+ 
     " streetaddress, zipcode, city ";
     
-    let params=[];   
+    let params=[]; params.push(null);  
     for (const [key, value] of Object.entries(request.body)) {
         console.log(`${key} ${value}`); 
         // this would be the place to so some sanity checks on
         // input, i.e. no scripts, no <>, or other monkey business
         params.push(value);// column value
       }
- 
-    // right now, the order of fields in the enroll form mut match the
-    // order for the table. We will want to change this.  
-    let sql = "INSERT INTO linguists ("+columns+" ) "+
-    "VALUES (null, '"+params[0]+"','"+params[1]+"','"+params[2]+"','"+params[3]
-    +"','"+params[4]+"','"+params[5]+"','"+params[6]+"','"+params[7]+"','"+params[8]
-    +"','"+params[9]+"' )";
+    let pin=params.pop();
+
+    // right now, the order of fields in the enroll form mut match the form
+   let sql = "INSERT INTO linguists ("+columns+" ) "+
+   "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
     console.log(sql);
-    msg= dbops(sql, "Enrolled inserted ");
+    msg= dbops(sql, params, "Enrolled inserted ");
     
-    sql="Delete from id where id="+params.pop();
-    msg= dbops(sql, "random number deleted ");
+    
+    sql="Delete from id where id=?";
+    msg= dbops(sql, [pin], "random number deleted ");
 
     response.send(msg);
 });
 
 // common db INSERT and DELETE 
-function dbops(sql, msg){
-
-    db.run(sql, function(err) {
+function dbops(sql, params, msg){
+   
+    db.run(sql, params, function(err) {
         if (err) {
           return console.error(err.message);
         }
@@ -156,7 +155,7 @@ function processFile(inputFile) {
    
 }
 
-// do it
+// start it
 app.listen(3000, function(){
     console.log('Server is listening on port 3000');
 });
